@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+</head>
+<body>
+    <h2>Email Verification</h2>
+    <p>Verifying your email...</p>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyChuDGHhWVN-87V5TSVECaEZH3kFgDfV9U",
+            authDomain: "final-year-project-8ee8f.firebaseapp.com",
+            projectId: "final-year-project-8ee8f",
+            storageBucket: "final-year-project-8ee8f.appspot.com",
+            messagingSenderId: "132633010499",
+            appId: "1:132633010499:web:6584aa651c311ceb968ff6",
+            measurementId: "G-GLCG4PNB72"
+        };
+        // Initialize Firebase app
+        firebase.initializeApp(firebaseConfig);
+
+        // Get the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const actionCode = urlParams.get('oobCode');
+
+        // Apply the action code
+        firebase.auth().applyActionCode(actionCode)
+            .then(() => {
+                document.body.innerHTML = "<p>Your email has been verified. You can now <a href='/login'>login</a>.</p>";
+            })
+            .catch((error) => {
+                console.error("Error verifying email: ", error.message);
+                document.body.innerHTML = "<p>There was an error verifying your email. Please try again.</p>";
+            });
+    </script>
+</body>
+</html>
