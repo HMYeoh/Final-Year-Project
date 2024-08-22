@@ -1,5 +1,3 @@
-const { timeStamp } = require("console");
-
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyChuDGHhWVN-87V5TSVECaEZH3kFgDfV9U",
@@ -58,4 +56,33 @@ document.querySelector('form').addEventListener('submit', function(event) {
                 alert("Error registering. Please try again.");
             }
         });
+});
+
+// Get the theme toggle element
+const themeToggle = document.getElementById('theme-toggle');
+
+// Check if the user has a saved preference
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    document.body.classList.add(currentTheme);
+
+    // Update the emoji based on the current theme
+    if (currentTheme === 'dark-mode') {
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌙';
+    }
+}
+
+// Add event listener to the theme toggle button
+themeToggle.addEventListener('click', function() {
+    if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', '');
+    } else {
+        document.body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark-mode');
+    }
 });
