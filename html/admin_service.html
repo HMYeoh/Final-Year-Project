@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Service</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/admin_service.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="../html/admin_dashboard.html">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#user"><i class="fas fa-user icon"></i>User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/admin_service.html"><i class="fas fa-cogs icon"></i>Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/admin_staff.html"><i class="fas fa-users icon"></i>Staff</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link logout-button" href="../html/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Service List</h3>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addServiceModal">
+                New Service
+            </button>
+        </div>
+        <div class="input-group mt-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by service name">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" onclick="searchService()">Search</button>
+            </div>
+        </div>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Estimated Time</th>
+                    <th>Categories</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="serviceList">
+                <!-- Services will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Edit Service Modal -->
+    <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editServiceForm">
+            <input type="hidden" id="editServiceId">
+            <div class="form-group">
+              <label for="editServiceName">Service Name</label>
+              <input type="text" class="form-control" id="editServiceName" required>
+            </div>
+            <div class="form-group">
+              <label for="editServicePrice">Service Price</label>
+              <input type="text" class="form-control" id="editServicePrice" required>
+            </div>
+            <div class="form-group">
+              <label for="editEstimatedTime">Estimated Time</label>
+              <input type="text" class="form-control" id="editEstimatedTime" required>
+            </div>
+            <div class="form-group">
+              <label for="editServiceImage">Service Image</label>
+              <input type="file" class="form-control-file" id="editServiceImage" accept="image/*">
+            </div>
+            <div class="form-group">
+              <label for="editServiceCategories">Service Categories</label>
+              <select class="form-control" id="editServiceCategories" required>
+                <option value="Hair Cut">Hair Cut</option>
+                <option value="Hair Wash & Blow">Hair Wash & Blow</option>
+                <option value="Colouring">Colouring</option>
+                <option value="Hair Treatment">Hair Treatment</option>
+                <option value="Scalp Treatment">Scalp Treatment</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editServiceDetails">Service Details</label>
+              <textarea class="form-control" id="editServiceDetails" rows="3" required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="updateService()">Update Service</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Add Service Modal -->
+    <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addServiceForm">
+                        <div class="form-group">
+                            <label for="serviceName">Service Name</label>
+                            <input type="text" class="form-control" id="serviceName" name="serviceName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="servicePrice">Service Price</label>
+                            <input type="text" class="form-control" id="servicePrice" name="servicePrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estimatedTime">Estimated Time</label>
+                            <input type="text" class="form-control" id="estimatedTime" name="estimatedTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceImage">Service Image</label>
+                            <input type="file" class="form-control-file" id="serviceImage" name="serviceImage" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceCategories">Service Categories</label>
+                            <select class="form-control" id="serviceCategories" name="serviceCategories" required>
+                                <option value="">Select Category</option>
+                                <option value="Hair Cut">Hair Cut</option>
+                                <option value="Hair Wash & Blow">Hair Wash & Blow</option>
+                                <option value="Colouring">Colouring</option>
+                                <option value="Hair Treatment">Hair Treatment</option>
+                                <option value="Scalp Treatment">Scalp Treatment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceDetails">Service Details</label>
+                            <textarea class="form-control" id="serviceDetails" name="serviceDetails" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Service</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (with jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <!-- Custom Scripts -->
+    <script src="../java/admin_service.js"></script>
+</body>
+</html>
