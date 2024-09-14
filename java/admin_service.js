@@ -38,6 +38,7 @@ function fetchAndDisplayServices(searchQuery = '') {
                         <tr>
                             <td><img src="${service.serviceImageURL}" alt="${service.serviceName}" style="width: 100px; height: 100px;"></td>
                             <td>${service.serviceName}</td>
+                            <td>${service.gender}</td>
                             <td>${service.servicePrice}</td>
                             <td>${service.estimatedTime}</td>
                             <td>${service.serviceCategories}</td>
@@ -87,6 +88,7 @@ function editService(serviceId) {
                 // Set current data into the modal form fields
                 document.getElementById('editServiceId').value = serviceId;
                 document.getElementById('editServiceName').value = service.serviceName;
+                document.getElementById('editGender').value = service.gender;
                 document.getElementById('editServicePrice').value = service.servicePrice;
                 document.getElementById('editEstimatedTime').value = service.estimatedTime;
                 document.getElementById('editServiceCategories').value = service.serviceCategories;
@@ -105,6 +107,7 @@ function updateService() {
     // Get the updated values from the modal form
     const serviceId = document.getElementById('editServiceId').value;
     const serviceName = document.getElementById('editServiceName').value.trim();
+    const gender = document.getElementById('editGender').value.trim();
     const servicePrice = document.getElementById('editServicePrice').value.trim();
     const estimatedTime = document.getElementById('editEstimatedTime').value.trim();
     const serviceCategories = document.getElementById('editServiceCategories').value.trim();
@@ -113,6 +116,7 @@ function updateService() {
     
     let updateData = {
         serviceName: serviceName,
+        gender: gender,
         servicePrice: servicePrice,
         estimatedTime: estimatedTime,
         serviceCategories: serviceCategories,
@@ -160,6 +164,7 @@ document.getElementById('addServiceForm').addEventListener('submit', function(ev
     
     // Get form values
     const serviceName = document.getElementById('serviceName').value.trim();
+    const gender = document.getElementById('gender').value.trim();
     const servicePrice = document.getElementById('servicePrice').value.trim();
     const estimatedTime = document.getElementById('estimatedTime').value.trim();
     const serviceCategories = document.getElementById('serviceCategories').value.trim();
@@ -185,6 +190,7 @@ document.getElementById('addServiceForm').addEventListener('submit', function(ev
             // Save item details and image URL to Firestore
             return db.collection('services').add({
                 serviceName: serviceName,
+                gender: gender,
                 servicePrice: servicePrice,
                 estimatedTime: estimatedTime,
                 serviceCategories: serviceCategories,
