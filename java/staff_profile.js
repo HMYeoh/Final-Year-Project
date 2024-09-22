@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+const storage = firebase.storage(); // Initialize Firebase Storage
 
 // Fetch and display staff profile information
 function loadStaffProfile() {
@@ -21,13 +22,18 @@ function loadStaffProfile() {
 
     if (user) {
         const staffId = user.uid;
-        
+
         db.collection('staffs').doc(staffId).get().then((doc) => {
             if (doc.exists) {
                 const staffData = doc.data();
                 document.getElementById('staffName').value = staffData.username || '';
                 document.getElementById('staffEmail').value = staffData.email || '';
-                document.getElementById('staffPhone').value = staffData.phone || ''; // Load the phone number
+                document.getElementById('staffPhone').value = staffData.phone || '';
+
+                // Display profile picture
+                if (staffData.profilePictureURL) {
+                    document.getElementById('profileImageDisplay').src = staffData.profilePictureURL;
+                }
             } else {
                 console.log("No such document!");
             }
@@ -40,23 +46,23 @@ function loadStaffProfile() {
     }
 }
 
-// Save the updated profile information
+// Save the updated profile information, including the profile picture
 document.getElementById('profile-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     const user = auth.currentUser;
 
     if (user) {
         const staffId = user.uid;
         const staffName = document.getElementById('staffName').value;
         const staffEmail = document.getElementById('staffEmail').value;
-        const staffPhone = document.getElementById('staffPhone').value; // Get the phone number
+        const staffPhone = document.getElementById('staffPhone').value;
 
-        // Update the staff document in Firestore
+        // Update Firestore with name, email, and phone number
         db.collection('staffs').doc(staffId).update({
             username: staffName,
             email: staffEmail,
-            phone: staffPhone // Update the phone number
+            phone: staffPhone
         })
         .then(() => {
             alert("Profile updated successfully!");
@@ -64,13 +70,32 @@ document.getElementById('profile-form').addEventListener('submit', function(even
         .catch((error) => {
             console.error("Error updating profile:", error);
         });
+
+        // Handle profile picture upload
+        const profilePictureFile = document.getElementById('profilePicture').files[0];
+        if (profilePictureFile) {
+            const storageRef = storage.ref(`staffs/${staffId}/profilePicture.jpg`);
+
+            // Upload the profile picture
+            storageRef.put(profilePictureFile).then(() => {
+                return storageRef.getDownloadURL();
+            }).then((url) => {
+                // Save the profile picture URL in Firestore
+                db.collection('staffs').doc(staffId).update({
+                    profilePictureURL: url
+                });
+                document.getElementById('profileImageDisplay').src = url; // Update the image display
+            }).catch((error) => {
+                console.error("Error uploading profile picture:", error);
+            });
+        }
     } else {
         console.error("No user is currently logged in.");
         window.location.href = "../html/staff_login.html";
     }
 });
 
-// Wait for the Firebase auth state to be ready
+// Wait for Firebase auth state to be ready
 auth.onAuthStateChanged((user) => {
     if (user) {
         loadStaffProfile();

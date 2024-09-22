@@ -58,6 +58,12 @@
                         <label for="staffPhone">Phone Number:</label>
                         <input type="tel" id="staffPhone" class="form-control" required>
                     </div>
+                    <!-- Profile Picture Upload -->
+                    <div class="form-group">
+                        <label for="profilePicture">Profile Picture:</label>
+                        <input type="file" id="profilePicture" class="form-control-file">
+                        <img id="profileImageDisplay" src="" alt="Profile Picture" class="img-thumbnail mt-2" width="150">
+                    </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
@@ -66,12 +72,12 @@
 
     <!-- Bootstrap JS (with jQuery) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
     <!-- Custom Scripts -->
     <script src="../java/staff_profile.js"></script>
 </body>
