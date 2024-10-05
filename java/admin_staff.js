@@ -16,6 +16,32 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
+// Load Branches Dynamically for the Branch Selection
+function loadBranches() {
+    const branchDropdown = document.getElementById('branch');
+    branchDropdown.innerHTML = `<option value="">Select Branch</option>`; // Clear existing options
+
+    db.collection("branch").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const branchData = doc.data();
+                const option = document.createElement('option');
+                option.value = doc.id; // Assuming the branch ID is the document ID
+                option.textContent = branchData.name || 'Unnamed Branch';
+                branchDropdown.appendChild(option);
+            });
+        })
+        .catch((error) => {
+            console.error("Error loading branches:", error.message);
+        });
+}
+
+// Call the function to load branches when the modal is shown
+$('#newStaffModal').on('shown.bs.modal', loadBranches);
+
+// Load Staff Data on Page Load
+loadStaffData();
+
 // Handle form submission for creating a new staff
 document.getElementById('new-staff-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
@@ -24,6 +50,13 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
     const username = document.getElementById('staff-username').value;
     const email = document.getElementById('staff-email').value;
     const password = document.getElementById('staff-password').value;
+    const branch = document.getElementById('branch').value; // Get selected branch
+
+    // Validate if branch is selected
+    if (!branch) {
+        alert("Please select a branch.");
+        return;
+    }
 
     // Create a new staff account in Firebase Authentication
     auth.createUserWithEmailAndPassword(email, password)
@@ -34,6 +67,7 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
             return db.collection("staffs").doc(user.uid).set({
                 username: username,
                 email: email,
+                branchId: branch, // Save the branch ID in Firestore
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
         })
@@ -55,6 +89,56 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
             alert("Error creating staff. Please try again.");
         });
 });
+
+// Open the Edit Modal and Load Staff Data
+function editStaff(staffId) {
+    // Fetch the staff data
+    db.collection("staffs").doc(staffId).get()
+        .then((doc) => {
+            if (doc.exists) {
+                const staffData = doc.data();
+                
+                // Set the form values for the staff
+                document.getElementById('edit-staff-id').value = staffId;
+                document.getElementById('edit-staff-username').value = staffData.username || '';
+                document.getElementById('edit-staff-email').value = staffData.email || '';
+
+                // Load branches dynamically for the edit form
+                const branchDropdown = document.getElementById('edit-branch');
+                branchDropdown.innerHTML = `<option value="">Select Branch</option>`; // Clear existing options
+
+                db.collection("branch").get()
+                    .then((querySnapshot) => {
+                        querySnapshot.forEach((branchDoc) => {
+                            const branchData = branchDoc.data();
+                            const option = document.createElement('option');
+                            option.value = branchDoc.id; // Assuming branch ID is the document ID
+                            option.textContent = branchData.name || 'Unnamed Branch';
+
+                            // Preselect the staff's current branch
+                            if (staffData.branchId === branchDoc.id) {
+                                option.selected = true;
+                            }
+
+                            branchDropdown.appendChild(option);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("Error loading branches:", error.message);
+                    });
+
+                // Show the edit modal
+                $('#editStaffModal').modal('show');
+            } else {
+                alert("Staff not found!");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching staff data:", error.message);
+            alert("Error fetching staff data. Please try again.");
+        });
+}
+
 
 // Function to load staff data from Firestore
 function loadStaffData() {
@@ -83,26 +167,6 @@ function loadStaffData() {
         });
 }
 
-// Function to open the edit staff modal
-function editStaff(staffId) {
-    db.collection("staffs").doc(staffId).get()
-        .then((doc) => {
-            if (doc.exists) {
-                const staffData = doc.data();
-                document.getElementById('edit-staff-id').value = staffId;
-                document.getElementById('edit-staff-username').value = staffData.username || '';
-                document.getElementById('edit-staff-email').value = staffData.email || '';
-                $('#editStaffModal').modal('show');
-            } else {
-                alert("Staff not found!");
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching staff data:", error.message);
-            alert("Error fetching staff data. Please try again.");
-        });
-}
-
 // Handle form submission for editing staff
 document.getElementById('edit-staff-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
@@ -112,19 +176,30 @@ document.getElementById('edit-staff-form').addEventListener('submit', function(e
     const username = document.getElementById('edit-staff-username').value;
     const email = document.getElementById('edit-staff-email').value;
     const password = document.getElementById('edit-staff-password').value;
+    const branch = document.getElementById('edit-branch').value;
+
+    // Validate if branch is selected
+    if (!branch) {
+        alert("Please select a branch.");
+        return;
+    }
 
     // Update staff data in Firestore
     db.collection("staffs").doc(staffId).update({
         username: username,
         email: email,
+        branchId: branch, // Update the branch ID in Firestore
         timestamp: firebase.firestore.FieldValue.serverTimestamp() // Update timestamp
     })
     .then(() => {
         if (password) {
-            // Send a password reset email
-            return auth.sendPasswordResetEmail(email)
+            // Update the staff's password directly
+            return auth.currentUser.updatePassword(password)
                 .then(() => {
-                    alert("Password reset email sent to staff!");
+                    alert("Password updated successfully!");
+                }).catch(error => {
+                    console.error("Error updating password:", error.message);
+                    alert("Error updating password. Please try again.");
                 });
         }
     })
@@ -160,7 +235,4 @@ function deleteStaff(staffId) {
     }
 }
 
-// Load staff data when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    loadStaffData();
-});
+
