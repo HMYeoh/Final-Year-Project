@@ -26,7 +26,8 @@ function loadBranches() {
             querySnapshot.forEach((doc) => {
                 const branchData = doc.data();
                 const option = document.createElement('option');
-                option.value = doc.id; // Assuming the branch ID is the document ID
+                option.value = doc.id; // Save the branch ID in value
+                option.setAttribute('data-name', branchData.name || 'Unnamed Branch'); // Save the branch name
                 option.textContent = branchData.name || 'Unnamed Branch';
                 branchDropdown.appendChild(option);
             });
@@ -35,6 +36,7 @@ function loadBranches() {
             console.error("Error loading branches:", error.message);
         });
 }
+
 
 // Call the function to load branches when the modal is shown
 $('#newStaffModal').on('shown.bs.modal', loadBranches);
@@ -50,10 +52,12 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
     const username = document.getElementById('staff-username').value;
     const email = document.getElementById('staff-email').value;
     const password = document.getElementById('staff-password').value;
-    const branch = document.getElementById('branch').value; // Get selected branch
+    const branchDropdown = document.getElementById('branch');
+    const branchId = branchDropdown.value; // Get selected branch ID
+    const branchName = branchDropdown.options[branchDropdown.selectedIndex].getAttribute('data-name'); // Get the branch name
 
     // Validate if branch is selected
-    if (!branch) {
+    if (!branchId) {
         alert("Please select a branch.");
         return;
     }
@@ -63,11 +67,11 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
         .then((userCredential) => {
             const user = userCredential.user;
 
-            // Save additional staff data to Firestore
+            // Save additional staff data to Firestore with branch name
             return db.collection("staffs").doc(user.uid).set({
                 username: username,
                 email: email,
-                branchId: branch, // Save the branch ID in Firestore
+                branchName: branchName, // Save the branch name in Firestore
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
         })
@@ -90,6 +94,7 @@ document.getElementById('new-staff-form').addEventListener('submit', function(ev
         });
 });
 
+
 // Open the Edit Modal and Load Staff Data
 function editStaff(staffId) {
     // Fetch the staff data
@@ -97,7 +102,7 @@ function editStaff(staffId) {
         .then((doc) => {
             if (doc.exists) {
                 const staffData = doc.data();
-                
+
                 // Set the form values for the staff
                 document.getElementById('edit-staff-id').value = staffId;
                 document.getElementById('edit-staff-username').value = staffData.username || '';
@@ -112,11 +117,11 @@ function editStaff(staffId) {
                         querySnapshot.forEach((branchDoc) => {
                             const branchData = branchDoc.data();
                             const option = document.createElement('option');
-                            option.value = branchDoc.id; // Assuming branch ID is the document ID
+                            option.value = branchData.name; // Use branch name as the value
                             option.textContent = branchData.name || 'Unnamed Branch';
 
                             // Preselect the staff's current branch
-                            if (staffData.branchId === branchDoc.id) {
+                            if (staffData.branchName === branchData.name) {
                                 option.selected = true;
                             }
 
@@ -138,6 +143,7 @@ function editStaff(staffId) {
             alert("Error fetching staff data. Please try again.");
         });
 }
+
 
 
 // Function to load staff data from Firestore
@@ -175,11 +181,11 @@ document.getElementById('edit-staff-form').addEventListener('submit', function(e
     const staffId = document.getElementById('edit-staff-id').value;
     const username = document.getElementById('edit-staff-username').value;
     const email = document.getElementById('edit-staff-email').value;
-    const password = document.getElementById('edit-staff-password').value;
-    const branch = document.getElementById('edit-branch').value;
+    const password = document.getElementById('edit-staff-password').value; // Assuming you want to allow password changes
+    const branchName = document.getElementById('edit-branch').value; // Get selected branch name
 
     // Validate if branch is selected
-    if (!branch) {
+    if (!branchName) {
         alert("Please select a branch.");
         return;
     }
@@ -188,7 +194,7 @@ document.getElementById('edit-staff-form').addEventListener('submit', function(e
     db.collection("staffs").doc(staffId).update({
         username: username,
         email: email,
-        branchId: branch, // Update the branch ID in Firestore
+        branchName: branchName, // Update the branch name in Firestore
         timestamp: firebase.firestore.FieldValue.serverTimestamp() // Update timestamp
     })
     .then(() => {
@@ -218,6 +224,7 @@ document.getElementById('edit-staff-form').addEventListener('submit', function(e
         alert("Error updating staff. Please try again.");
     });
 });
+
 
 
 // Function to delete staff

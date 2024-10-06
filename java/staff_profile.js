@@ -34,6 +34,9 @@ function loadStaffProfile() {
                 if (staffData.profilePictureURL) {
                     document.getElementById('profileImageDisplay').src = staffData.profilePictureURL;
                 }
+
+                // Store the current branch name
+                window.currentBranchName = staffData.branchName || '';
             } else {
                 console.log("No such document!");
             }
@@ -57,12 +60,19 @@ document.getElementById('profile-form').addEventListener('submit', function(even
         const staffName = document.getElementById('staffName').value;
         const staffEmail = document.getElementById('staffEmail').value;
         const staffPhone = document.getElementById('staffPhone').value;
+        const selectedBranch = document.getElementById('edit-branch').value;
+
+        if (!selectedBranch) {
+            alert("Please select a branch.");
+            return;
+        }
 
         // Update Firestore with name, email, and phone number
         db.collection('staffs').doc(staffId).update({
             username: staffName,
             email: staffEmail,
-            phone: staffPhone
+            phone: staffPhone,
+            branchName: selectedBranch // Save branch name instead of branch ID
         })
         .then(() => {
             alert("Profile updated successfully!");
@@ -95,10 +105,33 @@ document.getElementById('profile-form').addEventListener('submit', function(even
     }
 });
 
+function loadBranches() {
+    const branchSelect = document.getElementById('edit-branch'); // Dropdown element
+
+    // Fetch all documents from the "branch" collection
+    db.collection('branch').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const branchData = doc.data();
+            const option = document.createElement('option');
+            option.value = branchData.name;
+            option.textContent = branchData.name;
+            branchSelect.appendChild(option);
+
+            // Pre-select the branch if it matches the staff's branchName
+            if (branchData.name === window.currentBranchName) {
+                option.selected = true;
+            }
+        });
+    }).catch((error) => {
+        console.error("Error fetching branches:", error);
+    });
+}
+
 // Wait for Firebase auth state to be ready
 auth.onAuthStateChanged((user) => {
     if (user) {
         loadStaffProfile();
+        loadBranches();
     } else {
         console.error("No user is currently logged in.");
         window.location.href = "../html/staff_login.html";
