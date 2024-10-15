@@ -1,0 +1,99 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: #333;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    padding: 0.5rem 2rem; /* Adjust padding to change height */
+}
+
+.navbar-nav .nav-item .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item .nav-link .icon {
+    margin-right: 8px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff; /* Text color for navbar links */
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffffff; /* Text color for the brand */
+}
+
+/* Logout Button Styling */
+.logout-button {
+    background-color: #dc3545; /* Red background color */
+    color: #ffffff; /* White text color */
+    border-radius: 4px; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Padding inside the button */
+    font-weight: normal; /* Less bold text */
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    color: #ffffff; /* Ensure text color remains white */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.logout-button i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Calendar */
+#calendar {
+    font-family: 'Afacad Flux', sans-serif; /* Change to your desired font */
+}
+
+.fc-col-header-cell, /* Column headers */
+.fc-col-header-cell-cushion {
+    text-decoration: none;
+    color: black; /* Set the font color of the week names to black */
+}
+
+.fc-col-header-cell a,
+.fc-col-header-cell a:hover {
+    text-decoration: none; /* Ensure no underline appears on hover */
+}
+
+.fc-daygrid-day a {
+    text-decoration: none; /* Remove underline from all links */
+    color: black;
+}
+
+.fc-daygrid-day a:hover {
+    text-decoration: none; /* Ensure underline doesn't appear on hover */
+}
+
+/* Hover effect for FullCalendar date cells */
+.fc-daygrid-day:hover {
+    background-color: #9DD1F1; /* Change this color to your preferred hover color */
+    cursor: pointer; /* Changes the cursor to pointer when hovering */
+    transition: background-color 0.3s ease; /* Smooth transition for the color change */
+}
+
+.fc-day-today {
+    background-color: #34a0a4 !important; /* Set the background to green */
+    color: white; /* Optionally set the text color to white for better contrast */
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.fc-day-today a {
+    color: white; /* Optionally set the text color to white for better contrast */
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+#appointments-list .list-group-item {
+    padding: 15px; /* Adjust padding as needed */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+

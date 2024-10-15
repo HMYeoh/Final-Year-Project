@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Profile</title>
+    <title>Staff Schedule</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/staff_dashboard.css">
+    <link rel="stylesheet" href="../css/staff_appointment.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -38,54 +44,30 @@
         </div>
     </nav>
 
-    <!-- Staff Profile Section -->
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h3>Staff Profile</h3>
-            </div>
-            <div class="card-body">
-                <form id="profile-form">
-                    <div class="form-group">
-                        <label for="staffName">Name:</label>
-                        <input type="text" id="staffName" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="staffEmail">Email:</label>
-                        <input type="email" id="staffEmail" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="staffPhone">Phone Number:</label>
-                        <input type="tel" id="staffPhone" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-branch">Branch</label>
-                        <select class="form-control" id="edit-branch" name="branch" required>
-                            <option value="">Select Branch</option>
-                            <!-- Branches will be dynamically loaded here -->
-                        </select>
-                    </div>
-                    <!-- Profile Picture Upload -->
-                    <div class="form-group">
-                        <label for="profilePicture">Profile Picture:</label>
-                        <input type="file" id="profilePicture" class="form-control-file">
-                        <img id="profileImageDisplay" src="" alt="Profile Picture" class="img-thumbnail mt-2" width="150">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
+    <!-- Staff Appointment Schedule Section -->
+    
+    <!-- Calendar Section -->
+    <div class="container mt-5">
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Appointment List -->
+    <div class="container mt-5">
+        <h4>Appointments for <span id="selected-date"></span></h4>
+        <ul id="appointments-list" class="list-group"></ul>
     </div>
 
     <!-- Bootstrap JS (with jQuery) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
     <!-- Custom Scripts -->
-    <script src="../java/staff_profile.js"></script>
+    <script src="../java/staff_appointment.js"></script>
 </body>
 </html>
