@@ -92,51 +92,46 @@ function renderBarChart(serviceNames, serviceFrequencies) {
     });
 }
 
-// Filter by month function to get user input
-function filterByMonth() {
-    const year = parseInt(document.getElementById('year-select').value);
+// Filter the data based on the selected month and year
+async function filterByMonth() {
+    const year = document.getElementById('year-select').value;
     const month = parseInt(document.getElementById('month-select').value);
 
-    // Fetch and display data for the selected month
-    fetchServicesByMonth(year, month);
+    await fetchServicesByMonth(year, month);
 }
 
-// Convert the data into CSV format
-function convertToCSV(serviceNames, serviceFrequencies) {
-    let csvContent = "Service Name,Frequency\n"; // CSV header
+// Function to export data to CSV
+function exportCSV() {
+    const year = document.getElementById('year-select').value;
+    const month = document.getElementById('month-select').value;
 
-    serviceNames.forEach((serviceName, index) => {
-        const frequency = serviceFrequencies[index];
-        csvContent += `${serviceName},${frequency}\n`;
+    fetchServicesByMonth(year, month).then(({ serviceNames, serviceFrequencies }) => {
+        const csvData = [];
+        csvData.push(['Service Name', 'Frequency']);
+        serviceNames.forEach((name, index) => {
+            csvData.push([name, serviceFrequencies[index]]);
+        });
+
+        const csvContent = "data:text/csv;charset=utf-8,"
+            + csvData.map(e => e.join(",")).join("\n");
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "service_frequency_report.csv");
+        document.body.appendChild(link);
+        link.click();
     });
-
-    return csvContent;
 }
 
-// Function to trigger CSV download
-function downloadCSV(csvContent, filename) {
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
+// Initial fetch of data for the current month and year
+const today = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth();
 
-    // Append the link to the document and click to download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
+document.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById('year-select').value = currentYear;
+    document.getElementById('month-select').value = currentMonth;
 
-// Main function to export data to CSV
-async function exportCSV() {
-    const year = parseInt(document.getElementById('year-select').value);
-    const month = parseInt(document.getElementById('month-select').value);
-
-    try {
-        const { serviceNames, serviceFrequencies } = await fetchServicesByMonth(year, month);
-        const csvContent = convertToCSV(serviceNames, serviceFrequencies);
-        const filename = `service_report_${year}_${month + 1}.csv`; // Format filename
-        downloadCSV(csvContent, filename);
-    } catch (error) {
-        console.error("Error exporting CSV: ", error);
-    }
-}
+    await fetchServicesByMonth(currentYear, currentMonth);
+});
