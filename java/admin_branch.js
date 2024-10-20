@@ -16,10 +16,11 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Function to create a new branch
-const createBranch = (branchNo, branchName) => {
+const createBranch = (branchNo, branchName, branchPhone) => {
     db.collection("branch").add({
         branch: branchNo,
         name: branchName,
+        phone: branchPhone,
         createdAt: firebase.firestore.FieldValue.serverTimestamp() // Add timestamp for branch creation
     })
     .then(() => {
@@ -27,6 +28,7 @@ const createBranch = (branchNo, branchName) => {
         // Optionally, clear the form fields
         document.getElementById('branch-no').value = '';
         document.getElementById('branch-name').value = '';
+        document.getElementById('branch-phone').value = '';
         // Close the modal
         $('#newBranchModal').modal('hide');
         // Refresh the branch list
@@ -42,8 +44,9 @@ document.getElementById('new-branch-form').addEventListener('submit', (e) => {
     e.preventDefault(); // Prevent the form from submitting the default way
     const branchNo = document.getElementById('branch-no').value;
     const branchName = document.getElementById('branch-name').value;
-    if (branchNo && branchName) {
-        createBranch(branchNo, branchName);
+    const branchPhone = document.getElementById('branch-phone').value;
+    if (branchNo && branchName && branchPhone) {
+        createBranch(branchNo, branchName, branchPhone);
     } else {
         alert("Please fill in all fields.");
     }
@@ -61,9 +64,10 @@ const fetchBranchList = () => {
                 <tr>
                     <td>${branchData.branch}</td>
                     <td>${branchData.name}</td>
+                    <td>${branchData.phone}</td>
                     <td>${branchData.createdAt ? branchData.createdAt.toDate().toLocaleString() : 'N/A'}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" onclick="editBranch('${doc.id}', '${branchData.branch}', '${branchData.name}')">Edit</button>
+                        <button class="btn btn-sm btn-primary" onclick="editBranch('${doc.id}', '${branchData.branch}', '${branchData.name}', '${branchData.phone}')">Edit</button>
                         <button class="btn btn-sm btn-danger" onclick="deleteBranch('${doc.id}')">Delete</button>
                     </td>
                 </tr>
@@ -76,21 +80,23 @@ const fetchBranchList = () => {
 };
 
 // Function to open the Edit Branch Modal with existing data
-const editBranch = (branchId, branchNo, branchName) => {
+const editBranch = (branchId, branchNo, branchName, branchPhone) => {
     // Set the current branch data in the form fields
     document.getElementById('edit-branch-id').value = branchId;
     document.getElementById('edit-branch-no').value = branchNo;
     document.getElementById('edit-branch-name').value = branchName;
+    document.getElementById('edit-branch-phone').value = branchPhone;
     
     // Open the Edit Branch Modal
     $('#editBranchModal').modal('show');
 };
 
 // Function to update the branch details in Firestore
-const updateBranch = (branchId, updatedBranchNo, updatedBranchName) => {
+const updateBranch = (branchId, updatedBranchNo, updatedBranchName, updatedBranchPhone) => {
     db.collection("branch").doc(branchId).update({
         branch: updatedBranchNo,
         name: updatedBranchName,
+        phone: updatedBranchPhone,
     })
     .then(() => {
         console.log("Branch updated successfully!");
@@ -112,10 +118,11 @@ document.getElementById('edit-branch-form').addEventListener('submit', (e) => {
     const branchId = document.getElementById('edit-branch-id').value;
     const updatedBranchNo = document.getElementById('edit-branch-no').value;
     const updatedBranchName = document.getElementById('edit-branch-name').value;
+    const updatedBranchPhone = document.getElementById('edit-branch-phone').value;
 
     // Call the update function if both fields have values
-    if (updatedBranchNo && updatedBranchName) {
-        updateBranch(branchId, updatedBranchNo, updatedBranchName);
+    if (updatedBranchNo && updatedBranchName && updatedBranchPhone) {
+        updateBranch(branchId, updatedBranchNo, updatedBranchName, updatedBranchPhone);
     } else {
         alert("Please fill in all fields.");
     }
