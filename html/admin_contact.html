@@ -9,9 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/admin_contact.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -47,47 +45,58 @@
     </nav>
 
     <div class="container mt-4">
-        <h2>Service Frequency Report</h2>
-
-        <!-- Filter Section -->
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <label for="year-select">Select Year:</label>
-                <select id="year-select" class="form-control">
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <!-- Add more years as needed -->
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="month-select">Select Month:</label>
-                <select id="month-select" class="form-control">
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                </select>
-            </div>
-            <div class="col-md-4 d-flex align-items-end">
-                <button onclick="filterByMonth()" class="btn btn-primary">Filter</button>
-            </div>
+        <!-- Header and Button Row -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Contact List</h3>
         </div>
 
-        <!-- Export Button -->
-        <div class="mb-3">
-            <button onclick="exportCSV()" class="btn btn-success">Export Data (CSV)</button>
-        </div>
+        <!-- Contact List Table -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Subject</th>
+                    <th>User Id</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="contact-list">
+                <!-- User data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
 
-        <!-- Bar Chart Section -->
-        <canvas id="serviceChart"></canvas>
+    <!-- Modal to view message details -->
+    <div class="modal fade" id="viewMessageModal" tabindex="-1" aria-labelledby="viewMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewMessageModalLabel">Contact Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Username:</strong> <span id="modal-username"></span></p>
+                    <p><strong>User Id:</strong> <span id="modal-userId"></span></p>
+                    <p><strong>Subject:</strong> <span id="modal-subject"></span></p>
+                    <p><strong>Message:</strong> <span id="modal-message"></span></p>
+                    <p><strong>Created At:</strong> <span id="modal-createdAt"></span></p>
+
+                    <!-- Reply Section -->
+                    <div class="mt-3">
+                        <textarea id="replyMessage" class="form-control" rows="4" placeholder="Type your reply here..."></textarea>
+                        <button id="replyButton" class="btn btn-primary mt-2">Reply</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS (with jQuery) -->
@@ -101,6 +110,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <!-- Custom Scripts -->
-    <script src="../java/admin_dashboard.js"></script>
+    <script src="../java/admin_contact.js"></script>
 </body>
 </html>
