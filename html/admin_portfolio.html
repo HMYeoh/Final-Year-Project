@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin (Branch)</title>
+    <title>Admin Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/admin_branch.css">
+    <link rel="stylesheet" href="../css/admin_portfolio.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -46,88 +46,98 @@
             </ul>
         </div>
     </nav>
-    
-    <div class="container mt-4">
-            <!-- Header and Button Row -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="mb-0">Branch List</h3>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newBranchModal">
-                    New Branch
-                </button>
-            </div>
-        
 
-        <!-- Branch List Table -->
+    <div class="container mt-4">
+        <!-- Header and Button Row -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Portfolio List</h3>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPortfolioModal">
+                New Portfolio
+            </button>
+        </div>
+    
+
+        <!-- Portfolio List Table -->
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Image</th>
                     <th>Branch</th>
                     <th>Name</th>
-                    <th>Phone (+60)</th>
                     <th>Created At</th>
                     <th>Options</th>
                 </tr>
             </thead>
-            <tbody id="branch-list">
-                <!-- Branch data will be inserted here -->
+            <tbody id="portfolio-list">
+                <!-- Portfolio data will be inserted here -->
             </tbody>
         </table>
 
-        <!-- Edit Branch Modal -->
-        <div class="modal fade" id="editBranchModal" tabindex="-1" aria-labelledby="editBranchModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editBranchModalLabel">Edit Branch</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="edit-branch-form">
-                            <input type="hidden" id="edit-branch-id"> <!-- Hidden field to store branch ID -->
-                            <div class="form-group">
-                                <label for="edit-branch-no">Branch</label>
-                                <input type="text" class="form-control" id="edit-branch-no" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-branch-name">Name</label>
-                                <input type="text" class="form-control" id="edit-branch-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-branch-phone">Phone</label>
-                                <input type="text" class="form-control" id="edit-branch-phone" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="newBranchModal" tabindex="-1" aria-labelledby="newBranchModalLabel" aria-hidden="true">
+    <!-- Edit Portfolio Modal -->
+    <div class="modal fade" id="editPortfolioModal" tabindex="-1" aria-labelledby="editPortfolioModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newBranchModalLabel">Add New Branch</h5>
+                    <h5 class="modal-title" id="editPortfolioModalLabel">Edit Portfolio</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="new-branch-form">
+                    <form id="edit-portfolio-form">
+                        <input type="hidden" id="edit-branch-id"> <!-- Hidden field to store branch ID -->
                         <div class="form-group">
-                            <label for="branch-no">Branch</label>
-                            <input type="text" class="form-control" id="branch-no" required>
+                            <label for="edit-branch">Branch</label>
+                            <select class="form-control" id="edit-branch" name="branch" required>
+                                <option value="">Select Branch</option>
+                                <!-- Branches will be dynamically loaded here -->
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="branch-name">Name</label>
+                            <label for="edit-portfolio-name">Name</label>
+                            <input type="text" class="form-control" id="edit-portfolio-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPortfolioImage">Portfolio Image</label>
+                            <input type="file" class="form-control-file" id="editPortfolioImage" accept="image/*">
+                            <img id="editPortfolioImagePreview" src="" alt="Portfolio Image" style="width: 100px; height: 100px; margin-top: 10px;">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="newPortfolioModal" tabindex="-1" aria-labelledby="newPortfolioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newPortfolioModalLabel">Add New Portfolio</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-portfolio-form">
+                        <div class="form-group">
+                            <label for="branch">Branch</label>
+                            <select class="form-control" id="branch" name="branch" required>
+                                <option value="">Select Branch</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="portfolio-name">Name</label>
                             <input type="text" class="form-control" id="branch-name" required>
                         </div>
                         <div class="form-group">
-                            <label for="branch-phone">Phone</label>
-                            <input type="phone" class="form-control" id="branch-phone" required>
+                            <label for="portfolioImage">Portfolio Image</label>
+                            <input type="file" class="form-control-file" id="portfolioImage" name="portfolioImage" accept="image/*" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>
@@ -136,16 +146,17 @@
         </div>
     </div>
 
-</div>
-
     <!-- Bootstrap JS (with jQuery) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <!-- Custom Scripts -->
-    <script src="../java/admin_branch.js"></script>
+    <script src="../java/admin_portfolio.js"></script>
 </body>
 </html>
