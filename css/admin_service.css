@@ -99,7 +99,7 @@ body {
 }
 
 /* Buttons styling */
-.btn-primary, .btn-danger, .btn-success, .btn-secondary{
+.btn-primary {
     padding: 5px 10px;
     font-size: 14px;
     border-radius: 5px;
@@ -188,7 +188,7 @@ textarea.form-control {
 /* Button styling */
 .btn-primary, .btn-secondary {
     border-radius: 0.3rem;
-    padding: 0.3rem 1.1rem;
+    padding: 0.3rem 1rem;
 }
 
 .btn-primary {
