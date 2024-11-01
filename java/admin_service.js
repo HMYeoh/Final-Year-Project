@@ -207,6 +207,10 @@ document.getElementById('addServiceForm').addEventListener('submit', function(ev
             });
         })
         .then(() => {
+            // Close the modal
+            $('#addServiceModal').modal('hide');
+            // Refresh the service list
+            fetchAndDisplayServices();
             // Reset form after successful submission
             document.getElementById('addServiceForm').reset();
             alert('Service added successfully!');

@@ -3,11 +3,13 @@ body {
     flex-direction: column;
     margin: 0;
     color: #333;
+    background: linear-gradient(135deg, #f0f4f8, #a2d9ff);
+    min-height: 100vh;
 }
 
 .navbar {
     margin-bottom: 20px;
-    padding: 0.5rem 2rem; /* Adjust padding to change height */
+    padding: 0.5rem 2rem; 
 }
 
 .navbar-nav .nav-item .nav-link {
@@ -20,37 +22,193 @@ body {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff; /* Text color for navbar links */
+    color: #ffffff; 
 }
 
 .navbar-dark .navbar-brand {
-    color: #ffffff; /* Text color for the brand */
+    color: #ffffff; 
 }
 
 /* Logout Button Styling */
 .logout-button {
-    background-color: #dc3545; /* Red background color */
-    color: #ffffff; /* White text color */
-    border-radius: 4px; /* Rounded corners */
-    padding: 0.5rem 1rem; /* Padding inside the button */
-    font-weight: normal; /* Less bold text */
+    background-color: #dc3545; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    padding: 0.5rem 1rem; 
+    font-weight: normal; 
 }
 
 .logout-button:hover {
-    background-color: #c82333; /* Darker red on hover */
-    color: #ffffff; /* Ensure text color remains white */
-    text-decoration: none; /* Remove underline on hover */
+    background-color: #c82333; 
+    color: #ffffff; 
+    text-decoration: none; 
 }
 
 .logout-button i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
 }
 
+/* Main container styling */
 .container {
+    max-width: 70%; 
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    margin: 0 auto 20px; 
+    font-family: 'Afacad Flux', sans-serif;
 }
+
+
+/* Table styling */
+.table {
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table th {
+    background-color: #0066cc;
+    color: white;
+    padding: 15px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    font-weight: normal;
+}
+
+.table td {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+/* Row hover effect */
+.table tbody tr:hover {
+    background-color: #eef7ff;
+}
+
+/* Image thumbnail styling */
+.table td img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* Buttons styling */
+.btn-primary, .btn-danger, .btn-success, .btn-secondary{
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #e63946;
+    border: none;
+}
+
+.btn-success {
+    background-color: #2a9d8f;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Search bar */
+.input-group input[type="text"] {
+    border-radius: 8px 0 0 8px;
+}
+
+.input-group button {
+    border-radius: 0 8px 8px 0;
+}
+
+/* Modal styling */
+.modal-header {
+    background-color: #007bff;
+    color: #ffffff;
+    border-bottom: none;
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.modal-header .close {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.modal-body {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.3rem;
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: none;
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+/* Form styling */
+.form-group label {
+    color: #333;
+}
+
+.form-control, .form-control-file, .custom-select {
+    border-radius: 0.3rem;
+    border: 1px solid #ced4da;
+    box-shadow: none;
+    padding: 0.3rem;
+}
+
+.form-control:focus, .custom-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+/* Button styling */
+.btn-primary, .btn-secondary {
+    border-radius: 0.3rem;
+    padding: 0.3rem 1.1rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
 

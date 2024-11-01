@@ -3,11 +3,13 @@ body {
     flex-direction: column;
     margin: 0;
     color: #333;
+    background: linear-gradient(135deg, #f0f4f8, #a2d9ff);
+    min-height: 100vh;
 }
 
 .navbar {
     margin-bottom: 20px;
-    padding: 0.5rem 2rem; /* Adjust padding to change height */
+    padding: 0.5rem 2rem; 
 }
 
 .navbar-nav .nav-item .nav-link {
@@ -20,29 +22,36 @@ body {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff; /* Text color for navbar links */
+    color: #ffffff; 
 }
 
 .navbar-dark .navbar-brand {
-    color: #ffffff; /* Text color for the brand */
+    color: #ffffff; 
 }
 
 /* Logout Button Styling */
 .logout-button {
-    background-color: #dc3545; /* Red background color */
-    color: #ffffff; /* White text color */
-    border-radius: 4px; /* Rounded corners */
-    padding: 0.5rem 1rem; /* Padding inside the button */
-    font-weight: normal; /* Less bold text */
+    background-color: #dc3545; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    padding: 0.5rem 1rem; 
+    font-weight: normal; 
 }
 
 .logout-button:hover {
-    background-color: #c82333; /* Darker red on hover */
-    color: #ffffff; /* Ensure text color remains white */
-    text-decoration: none; /* Remove underline on hover */
+    background-color: #c82333; 
+    color: #ffffff;
+    text-decoration: none; 
 }
 
 .logout-button i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
 }
 
+.container {
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.modal {
+    font-family: 'Afacad Flux', sans-serif;
+}

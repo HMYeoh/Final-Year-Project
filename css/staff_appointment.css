@@ -3,11 +3,13 @@ body {
     flex-direction: column;
     margin: 0;
     color: #333;
+    background: linear-gradient(135deg, #f0f4f8, #5bc0be);
+    min-height: 100vh;
 }
 
 .navbar {
     margin-bottom: 20px;
-    padding: 0.5rem 2rem; /* Adjust padding to change height */
+    padding: 0.5rem 2rem; 
 }
 
 .navbar-nav .nav-item .nav-link {
@@ -20,79 +22,121 @@ body {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff; /* Text color for navbar links */
+    color: #ffffff; 
 }
 
 .navbar-dark .navbar-brand {
-    color: #ffffff; /* Text color for the brand */
+    color: #ffffff; 
 }
 
 /* Logout Button Styling */
 .logout-button {
-    background-color: #dc3545; /* Red background color */
-    color: #ffffff; /* White text color */
-    border-radius: 4px; /* Rounded corners */
-    padding: 0.5rem 1rem; /* Padding inside the button */
-    font-weight: normal; /* Less bold text */
+    background-color: #dc3545; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    padding: 0.5rem 1rem; 
+    font-weight: normal; 
 }
 
 .logout-button:hover {
-    background-color: #c82333; /* Darker red on hover */
-    color: #ffffff; /* Ensure text color remains white */
-    text-decoration: none; /* Remove underline on hover */
+    background-color: #c82333; 
+    color: #ffffff; 
+    text-decoration: none; 
 }
 
 .logout-button i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
 }
 
 /* Calendar */
 #calendar {
-    font-family: 'Afacad Flux', sans-serif; /* Change to your desired font */
+    font-family: 'Afacad Flux', sans-serif; 
 }
 
-.fc-col-header-cell, /* Column headers */
+.container h4 {
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.fc-col-header-cell, 
 .fc-col-header-cell-cushion {
     text-decoration: none;
-    color: black; /* Set the font color of the week names to black */
+    color: black; 
 }
 
 .fc-col-header-cell a,
 .fc-col-header-cell a:hover {
-    text-decoration: none; /* Ensure no underline appears on hover */
+    text-decoration: none; 
 }
 
 .fc-daygrid-day a {
-    text-decoration: none; /* Remove underline from all links */
+    text-decoration: none; 
     color: black;
 }
 
 .fc-daygrid-day a:hover {
-    text-decoration: none; /* Ensure underline doesn't appear on hover */
+    text-decoration: none; 
 }
 
 /* Hover effect for FullCalendar date cells */
 .fc-daygrid-day:hover {
-    background-color: #9DD1F1; /* Change this color to your preferred hover color */
-    cursor: pointer; /* Changes the cursor to pointer when hovering */
-    transition: background-color 0.3s ease; /* Smooth transition for the color change */
+    background-color: #9DD1F1; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
 }
 
 .fc-day-today {
-    background-color: #34a0a4 !important; /* Set the background to green */
-    color: white; /* Optionally set the text color to white for better contrast */
+    background-color: #34a0a4 !important; 
+    color: white; 
     font-family: 'Afacad Flux', sans-serif;
 }
 
 .fc-day-today a {
-    color: white; /* Optionally set the text color to white for better contrast */
+    color: white; 
     font-family: 'Afacad Flux', sans-serif;
 }
 
+/* Appointment List */
+#appointments-list {
+    margin-top: 20px;
+}
+
 #appointments-list .list-group-item {
-    padding: 15px; /* Adjust padding as needed */
+    background-color: #ffffff;
+    border-left: 5px solid #5bc0be;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
     margin-top: 10px;
+    font-family: 'Afacad Flux', sans-serif;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#appointments-list .list-group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#appointments-list .list-group-item i {
+    font-size: 1.2rem;
+    color: #5bc0be;
+    margin-right: 12px;
+}
+
+#appointments-list .list-group-item .appointment-details {
+    flex-grow: 1;
+}
+
+#appointments-list .list-group-item .appointment-time {
+    font-weight: bold;
+    color: #34a0a4;
+}
+
+#appointments-list h4 {
+    color: #343a40;
+    font-size: 1.5rem;
     margin-bottom: 10px;
+    font-family: 'Afacad Flux', sans-serif;
 }
 
 

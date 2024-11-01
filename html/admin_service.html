@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin (Service)</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -138,7 +140,7 @@
 
     <!-- Add Service Modal -->
     <div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="addServiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
@@ -148,47 +150,57 @@
                 </div>
                 <div class="modal-body">
                     <form id="addServiceForm">
-                        <div class="form-group">
-                            <label for="serviceName">Service Name</label>
-                            <input type="text" class="form-control" id="serviceName" name="serviceName" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="serviceName">Service Name</label>
+                                <input type="text" class="form-control" id="serviceName" name="serviceName" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="gender">Gender</label>
+                                <input type="text" class="form-control" id="gender" name="gender" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <input type="text" class="form-control" id="gender" name="gender" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="servicePrice">Service Price</label>
-                            <input type="text" class="form-control" id="servicePrice" name="servicePrice" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="estimatedTime">Estimated Time</label>
-                            <input type="text" class="form-control" id="estimatedTime" name="estimatedTime" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="servicePrice">Service Price</label>
+                                <input type="text" class="form-control" id="servicePrice" name="servicePrice" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="estimatedTime">Estimated Time</label>
+                                <input type="text" class="form-control" id="estimatedTime" name="estimatedTime" required>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="serviceImage">Service Image</label>
                             <input type="file" class="form-control-file" id="serviceImage" name="serviceImage" accept="image/*" required>
                         </div>
-                        <div class="form-group">
-                            <label for="serviceCategories">Service Categories</label>
-                            <select class="form-control" id="serviceCategories" name="serviceCategories" required>
-                                <option value="">Select Category</option>
-                                <option value="Hair Cut">Hair Cut</option>
-                                <option value="Hair Wash & Blow">Hair Wash & Blow</option>
-                                <option value="Colouring">Colouring</option>
-                                <option value="Hair Treatment">Hair Treatment</option>
-                                <option value="Scalp Treatment">Scalp Treatment</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="serviceCategories">Service Categories</label>
+                                <select class="custom-select" id="serviceCategories" name="serviceCategories" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Hair Cut">Hair Cut</option>
+                                    <option value="Hair Wash & Blow">Hair Wash & Blow</option>
+                                    <option value="Colouring">Colouring</option>
+                                    <option value="Hair Treatment">Hair Treatment</option>
+                                    <option value="Scalp Treatment">Scalp Treatment</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="serviceDetails">Service Details</label>
+                                <textarea class="form-control" id="serviceDetails" name="serviceDetails" rows="3" required></textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="serviceDetails">Service Details</label>
-                            <textarea class="form-control" id="serviceDetails" name="serviceDetails" rows="3" required></textarea>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Service</button>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Service</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap JS (with jQuery) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

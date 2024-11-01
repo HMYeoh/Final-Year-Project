@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin (Staff)</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -73,7 +75,7 @@
 
         <!-- Edit Staff Modal -->
         <div class="modal fade" id="editStaffModal" tabindex="-1" aria-labelledby="editStaffModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editStaffModalLabel">Edit Staff</h5>
@@ -84,13 +86,15 @@
                     <div class="modal-body">
                         <form id="edit-staff-form">
                             <input type="hidden" id="edit-staff-id"> <!-- Hidden field to store staff ID -->
-                            <div class="form-group">
-                                <label for="edit-staff-username">Username</label>
-                                <input type="text" class="form-control" id="edit-staff-username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-staff-email">Email</label>
-                                <input type="email" class="form-control" id="edit-staff-email" required>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="edit-staff-username">Username</label>
+                                    <input type="text" class="form-control" id="edit-staff-username" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="edit-staff-email">Email</label>
+                                    <input type="email" class="form-control" id="edit-staff-email" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit-branch">Branch</label>
@@ -98,21 +102,21 @@
                                     <option value="">Select Branch</option>
                                     <!-- Branches will be dynamically loaded here -->
                                 </select>
-                            </div>      
+                            </div>
                             <div class="form-group">
                                 <label for="edit-staff-password">Password (Leave blank if not changing)</label>
                                 <input type="password" class="form-control" id="edit-staff-password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- New Staff Modal -->
         <div class="modal fade" id="newStaffModal" tabindex="-1" aria-labelledby="newStaffModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="newStaffModalLabel">Add New Staff</h5>
@@ -122,31 +126,34 @@
                     </div>
                     <div class="modal-body">
                         <form id="new-staff-form">
-                            <div class="form-group">
-                                <label for="staff-username">Username</label>
-                                <input type="text" class="form-control" id="staff-username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="staff-email">Email</label>
-                                <input type="email" class="form-control" id="staff-email" required>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="staff-username">Username</label>
+                                    <input type="text" class="form-control" id="staff-username" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="staff-email">Email</label>
+                                    <input type="email" class="form-control" id="staff-email" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="branch">Branch</label>
                                 <select class="form-control" id="branch" name="branch" required>
                                     <option value="">Select Branch</option>
-                                    
+                                    <!-- Branches will be dynamically loaded here -->
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="staff-password">Password</label>
                                 <input type="password" class="form-control" id="staff-password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" class="btn btn-primary btn-block">Create</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
 
     </div>
 
