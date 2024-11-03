@@ -175,14 +175,14 @@ function loadStaffData() {
 
 // Handle form submission for editing staff
 document.getElementById('edit-staff-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+    event.preventDefault(); 
 
     // Get form values
     const staffId = document.getElementById('edit-staff-id').value;
     const username = document.getElementById('edit-staff-username').value;
     const email = document.getElementById('edit-staff-email').value;
-    const password = document.getElementById('edit-staff-password').value; // Assuming you want to allow password changes
-    const branchName = document.getElementById('edit-branch').value; // Get selected branch name
+    const password = document.getElementById('edit-staff-password').value; 
+    const branchName = document.getElementById('edit-branch').value; 
 
     // Validate if branch is selected
     if (!branchName) {

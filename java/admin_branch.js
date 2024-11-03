@@ -21,7 +21,7 @@ const createBranch = (branchNo, branchName, branchPhone) => {
         branch: branchNo,
         name: branchName,
         phone: branchPhone,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp() // Add timestamp for branch creation
+        createdAt: firebase.firestore.FieldValue.serverTimestamp() 
     })
     .then(() => {
         console.log("Branch added successfully!");

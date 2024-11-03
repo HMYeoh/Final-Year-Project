@@ -144,9 +144,9 @@ function editPortfolio(portfolioId) {
                 const portfolioData = doc.data();
 
                 // Populate the modal fields with the portfolio data
-                document.getElementById('edit-branch-id').value = portfolioId; // Store the portfolio ID
+                document.getElementById('edit-branch-id').value = portfolioId; 
                 document.getElementById('edit-portfolio-name').value = portfolioData.name;
-                document.getElementById('edit-branch').value = portfolioData.branchId; // Select branch
+                document.getElementById('edit-branch').value = portfolioData.branchId; 
 
                 // Optional: You can show the current image preview
                 document.getElementById('editPortfolioImagePreview').src = portfolioData.imageUrl || '';

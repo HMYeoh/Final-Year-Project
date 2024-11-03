@@ -76,30 +76,30 @@ function viewContactDetails(contactId) {
             const replyButton = document.getElementById("replyButton");
             replyButton.onclick = function () {
                 const replyMessage = replyMessageTextarea.value;
-                const userId = contact.userId; // Store userId for the reply
-                const username = contact.Username; // Store username for the reply
-                const subject = contact.Subject; // Store subject for the reply
-                const originalMessage = contact.Message; // Get the user's original message
-                const replyCreatedAt = new Date(); // Set current date and time for reply
+                const userId = contact.userId; 
+                const username = contact.Username; 
+                const subject = contact.Subject; 
+                const originalMessage = contact.Message; 
+                const replyCreatedAt = new Date(); 
             
                 // Save the reply along with the original message to Firestore inbox collection
                 db.collection("inbox").add({
                     userId: userId,
                     Username: username,
                     Subject: `Re: ${subject}`,
-                    originalMessage: originalMessage, // Save the original message
+                    originalMessage: originalMessage, 
                     Message: replyMessage,
                     createdAt: replyCreatedAt
                 }).then(() => {
                     // Update the original contact status to "Replied"
                     return db.collection("contact").doc(contactId).update({
-                        replyMessage: replyMessage, // Optional: save the reply message to contact if needed
-                        status: "Replied" // Set status to "Replied"
+                        replyMessage: replyMessage, 
+                        status: "Replied" 
                     });
                 }).then(() => {
                     alert("Reply sent successfully!");
-                    $('#viewMessageModal').modal('hide'); // Close the modal
-                    replyMessageTextarea.value = ""; // Clear the reply message
+                    $('#viewMessageModal').modal('hide'); 
+                    replyMessageTextarea.value = ""; 
                     location.reload();
                 }).catch((error) => {
                     console.error("Error sending reply: ", error);
@@ -112,8 +112,8 @@ function viewContactDetails(contactId) {
                 if (confirm("Are you sure you want to delete this message?")) {
                     db.collection("contact").doc(contactId).delete().then(() => {
                         alert("Message deleted successfully!");
-                        $('#viewMessageModal').modal('hide'); // Close the modal
-                        location.reload(); // Refresh the contact list
+                        $('#viewMessageModal').modal('hide'); 
+                        location.reload(); 
                     }).catch((error) => {
                         console.error("Error deleting message: ", error);
                     });
