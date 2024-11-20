@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/staff_dashboard.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="../html/staff_dashboard.html">Staff Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/staff_profile.html"><i class="fas fa-user icon"></i>Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/staff_appointment.html"><i class="fas fa-users icon"></i>Appointment</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link logout-button" href="../html/staff_login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Service Frequency Report</h2>
+
+        <!-- Filter Section -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="year-select">Select Year:</label>
+                <select id="year-select" class="form-control">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <!-- Add more years as needed -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="month-select">Select Month:</label>
+                <select id="month-select" class="form-control">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button onclick="filterByMonth()" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+
+        <!-- Export Button -->
+        <div class="mb-3">
+            <button onclick="exportCSV()" class="btn btn-success">Export Data (CSV)</button>
+        </div>
+
+        <!-- Bar Chart Section -->
+        <canvas id="serviceChart"></canvas>
+    </div>
+
+    <!-- Bootstrap JS (with jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    <!-- Custom Scripts -->
+    <script src="../java/staff_dashboard.js"></script>
+    
+</body>
+</html>

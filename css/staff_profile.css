@@ -1,0 +1,107 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: #333;
+    background: linear-gradient(135deg, #f0f4f8, #5bc0be);
+    min-height: 100vh;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    padding: 0.5rem 2rem; 
+}
+
+.navbar-nav .nav-item .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item .nav-link .icon {
+    margin-right: 8px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff; 
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffffff; 
+}
+
+/* Logout Button Styling */
+.logout-button {
+    background-color: #dc3545; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    padding: 0.5rem 1rem; 
+    font-weight: normal; 
+}
+
+.logout-button:hover {
+    background-color: #c82333; 
+    color: #ffffff; 
+    text-decoration: none; 
+}
+
+.logout-button i {
+    margin-right: 8px; 
+}
+
+/* Profile Container Styling */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Afacad Flux', sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #5bc0be;
+    color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    padding: 15px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control, .form-control-file, .btn-primary {
+    border-radius: 6px;
+}
+
+.btn-primary {
+    background-color: #5bc0be;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #3a9ba0;
+}
+
+.img-thumbnail {
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    margin-top: 10px;
+}

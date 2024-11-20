@@ -1,0 +1,138 @@
+/* Root variables for light mode */
+:root {
+    --background-color: linear-gradient(135deg, #81c4f7, #6784de);
+    --text-color: #333;
+    --container-bg-color: #ffffff;
+    --input-bg-color: #f9f9f9;
+    --input-border-color: #ddd;
+    --button-bg-color: #6784de;
+    --button-hover-color: #5671c1;
+    --link-color: #6784de;
+}
+
+/* Dark mode variables */
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --container-bg-color: #1e1e1e;
+    --input-bg-color: #333333;
+    --input-border-color: #555555;
+    --button-bg-color: #bb86fc;
+    --button-hover-color: #9b60ed;
+    --link-color: #bb86fc;
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Theme Toggle */
+.toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .theme-toggle {
+    background-color: #333333;
+}
+
+/* Login Container */
+.login-container {
+    background-color: var(--container-bg-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+/* Input Fields */
+.login-container input[type="username"],
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+}
+
+.login-container input[type="username"]:focus,
+.login-container input[type="email"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: var(--link-color);
+    outline: none;
+}
+
+/* Submit Button */
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-bg-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Links */
+.login-container p {
+    margin-top: 20px;
+}
+
+.login-container a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
